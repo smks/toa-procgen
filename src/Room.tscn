@@ -1,0 +1,185 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/RoomCollisions.gd" type="Script" id=1]
+[ext_resource path="res://src/Room.gd" type="Script" id=2]
+[ext_resource path="res://assets/level-guide.jpg" type="Texture" id=3]
+[ext_resource path="res://src/RoomTypes/SimpleRoom.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 80, 360 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 480, 48 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 80, 160 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 80, 168 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 224, 48 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 224, 40 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 32, 16 )
+
+[node name="Room" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.470588 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1280.0
+margin_bottom = 720.0
+texture = ExtResource( 3 )
+stretch_mode = 5
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="BlockedPassageCollisions" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Left" type="StaticBody2D" parent="BlockedPassageCollisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockedPassageCollisions/Left"]
+position = Vector2( 80, 360 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Right" type="StaticBody2D" parent="BlockedPassageCollisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockedPassageCollisions/Right"]
+position = Vector2( 1200, 360 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Top" type="StaticBody2D" parent="BlockedPassageCollisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockedPassageCollisions/Top"]
+position = Vector2( 640, 48 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="Bottom" type="StaticBody2D" parent="BlockedPassageCollisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockedPassageCollisions/Bottom"]
+position = Vector2( 640, 688 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="OpenPassageCollisions" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LeftTop" type="StaticBody2D" parent="OpenPassageCollisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenPassageCollisions/LeftTop"]
+position = Vector2( 80, 160 )
+shape = SubResource( 3 )
+
+[node name="LeftBottom" type="StaticBody2D" parent="OpenPassageCollisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenPassageCollisions/LeftBottom"]
+position = Vector2( 80, 552 )
+shape = SubResource( 4 )
+
+[node name="RightTop" type="StaticBody2D" parent="OpenPassageCollisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenPassageCollisions/RightTop"]
+position = Vector2( 1200, 160 )
+shape = SubResource( 3 )
+
+[node name="RightBottom" type="StaticBody2D" parent="OpenPassageCollisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenPassageCollisions/RightBottom"]
+position = Vector2( 1200, 552 )
+shape = SubResource( 4 )
+
+[node name="TopLeft" type="StaticBody2D" parent="OpenPassageCollisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenPassageCollisions/TopLeft"]
+position = Vector2( 384, 48 )
+shape = SubResource( 5 )
+
+[node name="TopRight" type="StaticBody2D" parent="OpenPassageCollisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenPassageCollisions/TopRight"]
+position = Vector2( 896, 48 )
+shape = SubResource( 5 )
+
+[node name="BottomLeft" type="StaticBody2D" parent="OpenPassageCollisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenPassageCollisions/BottomLeft"]
+position = Vector2( 384, 680 )
+shape = SubResource( 6 )
+
+[node name="BottomRight" type="StaticBody2D" parent="OpenPassageCollisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenPassageCollisions/BottomRight"]
+position = Vector2( 896, 680 )
+shape = SubResource( 6 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="ForestRoom" parent="YSort" instance=ExtResource( 4 )]
+
+[node name="TileMap" parent="YSort/ForestRoom" index="0"]
+tile_data = PoolIntArray( 131076, 0, 0, 131077, 0, 1, 131078, 0, 1, 131079, 0, 1, 131080, 0, 2, 131081, 10, 0, 131084, 5, 0, 131102, 10, 0, 131103, 0, 0, 131104, 0, 1, 131105, 0, 1, 131106, 0, 1, 131107, 0, 2, 196612, 0, 65536, 196613, 0, 65537, 196614, 0, 65537, 196615, 0, 65537, 196616, 0, 65538, 196617, 10, 0, 196626, 5, 0, 196631, 4, 0, 196638, 10, 0, 196639, 0, 65536, 196640, 0, 65537, 196641, 0, 65537, 196642, 0, 65537, 196643, 0, 65538, 262148, 0, 65536, 262149, 0, 65537, 262150, 0, 65537, 262151, 0, 65537, 262152, 0, 65538, 262153, 10, 0, 262155, 24, 0, 262156, 20, 0, 262167, 5, 0, 262174, 10, 0, 262175, 0, 65536, 262176, 0, 65537, 262177, 0, 65537, 262178, 0, 65537, 262179, 0, 65538, 327684, 0, 131072, 327685, 0, 131073, 327686, 0, 131073, 327687, 0, 131073, 327688, 0, 131074, 327689, 10, 0, 327707, 5, 0, 327710, 10, 0, 327711, 0, 131072, 327712, 0, 131073, 327713, 0, 131073, 327714, 0, 131073, 327715, 0, 131074, 393220, 10, 0, 393221, 10, 0, 393222, 10, 0, 393223, 10, 0, 393224, 10, 0, 393251, 24, 0, 458757, 22, 0, 458758, 22, 0, 458759, 22, 0, 458760, 25, 0, 458767, 11, 0, 458770, 4, 0, 458773, 11, 0, 524306, 5, 0, 524319, 5, 0, 589829, 4, 0, 589836, 4, 0, 589838, 5, 0, 589848, 11, 0, 589851, 4, 0, 655371, 11, 0, 720905, 4, 0, 720915, 4, 0, 720928, 5, 0, 786441, 11, 0, 786459, 5, 0, 851980, 5, 0, 851995, 11, 0, 917509, 25, 0, 917511, 25, 0, 983054, 11, 0, 983062, 5, 0, 1048580, 10, 0, 1048581, 10, 0, 1048582, 10, 0, 1048583, 10, 0, 1048584, 10, 0, 1048585, 10, 0, 1048606, 10, 0, 1048607, 10, 0, 1048608, 10, 0, 1048609, 10, 0, 1048610, 10, 0, 1048611, 10, 0, 1114116, 0, 0, 1114117, 0, 1, 1114118, 0, 1, 1114119, 0, 1, 1114120, 0, 2, 1114121, 10, 0, 1114128, 5, 0, 1114135, 11, 0, 1114142, 10, 0, 1114143, 0, 0, 1114144, 0, 1, 1114145, 0, 1, 1114146, 0, 1, 1114147, 0, 2, 1179652, 0, 65536, 1179653, 0, 65537, 1179654, 0, 65537, 1179655, 0, 65537, 1179656, 0, 65538, 1179657, 10, 0, 1179661, 11, 0, 1179678, 10, 0, 1179679, 0, 65536, 1179680, 0, 65537, 1179681, 0, 65537, 1179682, 0, 65537, 1179683, 0, 65538, 1245188, 0, 65536, 1245189, 0, 65537, 1245190, 0, 65537, 1245191, 0, 65537, 1245192, 0, 65538, 1245193, 10, 0, 1245206, 11, 0, 1245214, 10, 0, 1245215, 0, 65536, 1245216, 0, 65537, 1245217, 0, 65537, 1245218, 0, 65537, 1245219, 0, 65538, 1310724, 0, 131072, 1310725, 0, 131073, 1310726, 0, 131073, 1310727, 0, 131073, 1310728, 0, 131074, 1310729, 10, 0, 1310737, 11, 0, 1310750, 10, 0, 1310751, 0, 131072, 1310752, 0, 131073, 1310753, 0, 131073, 1310754, 0, 131073, 1310755, 0, 131074 )
+
+[node name="MoveToTopRoom" type="Area2D" parent="."]
+input_pickable = false
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MoveToTopRoom"]
+position = Vector2( 640, 16 )
+shape = SubResource( 7 )
+
+[node name="MoveToBottomRoom" type="Area2D" parent="."]
+input_pickable = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MoveToBottomRoom"]
+position = Vector2( 640, 704 )
+shape = SubResource( 7 )
+
+[node name="MoveToLeftRoom" type="Area2D" parent="."]
+input_pickable = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MoveToLeftRoom"]
+position = Vector2( 16, 352 )
+rotation = 1.5708
+shape = SubResource( 7 )
+
+[node name="MoveToRightRoom" type="Area2D" parent="."]
+input_pickable = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MoveToRightRoom"]
+position = Vector2( 1264, 352 )
+rotation = 1.5708
+shape = SubResource( 7 )
+[connection signal="body_entered" from="MoveToTopRoom" to="." method="_on_MoveToTopRoom_body_entered"]
+[connection signal="body_entered" from="MoveToBottomRoom" to="." method="_on_MoveToBottomRoom_body_entered"]
+[connection signal="body_entered" from="MoveToLeftRoom" to="." method="_on_MoveToLeftRoom_body_entered"]
+[connection signal="body_entered" from="MoveToRightRoom" to="." method="_on_MoveToRightRoom_body_entered"]
+
+[editable path="YSort/ForestRoom"]
